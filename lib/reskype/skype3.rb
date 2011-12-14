@@ -10,16 +10,26 @@ class Reskype
     end
 
     def chat_files
-      Dir[@dir + "/chat*.dbb"]
+      Dir[@dir + "/chat*.dbb"].reject {|f| f =~ /chat(msg|member)/}
     end
 
     def messages
-      chatmsg_files.map { |file|
-        MsgParser.new(File.open(file, "rb") {|f| f.read }).messages
-      }.flatten.map {|h| Message.new(h)}
+      @messages ||= begin
+        chatmsg_files.map { |file|
+          MsgParser.new(File.open(file, "rb") {|f| f.read }).messages
+        }.flatten.map {|h| Message.new(h)}
+      end
     end
     
     def chats
+      @chats ||= begin
+        chat_files.map { |file| 
+          ChatParser.new(File.open(file, "rb") {|f| f.read }).chats
+        }.flatten.map {|h| Chat.new(h)}
+      end
+    end
+    
+    def old_chats
       @chats ||= begin
         chats = {}
         messages.each do |message|
@@ -30,24 +40,69 @@ class Reskype
       end
     end
     
+    class ChatParser
+      attr_reader :chats
+
+      def initialize(content)
+        @content = content
+        @offset = 0
+        @chats = []
+        @scanner = StringScanner.new(content)
+        begin
+          while chat = read_chat
+            @chats << chat
+          end
+        rescue
+        end
+      end
+      
+      def read_chat
+        chat = {}
+        return nil unless skip_to("l33l")
+
+        skip_to("\xB8\x03")
+        chat[:chatname] = get_until_zero
+        
+        skip_to("\xCC\x03")
+        chat[:posters] = get_until_zero
+        
+        skip_to("\xD8\x03")
+        chat[:topic] = get_until_zero
+
+        chat
+      end
+      
+      def get_until_zero
+        @scanner.scan_until(Regexp.new("\x00"))[0..-2]
+      end
+      
+      def skip_to(bytes)
+        @scanner.skip_until(Regexp.new(bytes))
+      end
+    end
+    
     class Chat
       attr_reader :messages
       
-      def initialize(name)
-        @name = name
+      def initialize(hash)
+        @hash = hash
         @messages = []
       end
       
       def id
-        @name
+        @hash[:chatname]
       end
       
       def nice_name
-        @name
+        @hash[:topic]
       end
       
       def name
-        @name
+        @hash[:chatname]
+      end
+
+      def posters
+        (@hash[:posters] || "").split(" ")
       end
     end
     
@@ -71,6 +126,10 @@ class Reskype
       def body
         @hash[:body]
       end
+
+      def identities
+        nil
+      end
     end
     
     class MsgParser
@@ -82,11 +141,8 @@ class Reskype
         @messages = []
         @scanner = StringScanner.new(content)
         begin
-          i = 0
           loop do
             read_message
-            i += 1
-            puts i if i % 1000 == 0
           end
         rescue
         end

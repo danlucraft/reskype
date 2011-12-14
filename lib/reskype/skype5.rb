@@ -1,6 +1,4 @@
 
-require 'sqlite3'
-
 class Reskype
   class Skype5
     def initialize(filename)
@@ -58,7 +56,8 @@ class Reskype
       end
       
       def topic
-        @row[ROWS.index("topic")]
+        t = @row[ROWS.index("topic")]
+        t == "" ? nil : t
       end
       
       def details
@@ -74,7 +73,7 @@ class Reskype
       end
       
       def participants
-        (@row[ROWS.index("participants")] || "").split(" ")
+        ((@row[ROWS.index("participants")] || "").split(" ") + posters).uniq
       end
       
       def num_messages
@@ -112,6 +111,10 @@ class Reskype
       
       def body
         @row[ROWS.index("body_xml")] || ""
+      end
+      
+      def identities
+        @row[ROWS.index("identities")] || ""
       end
     end
     
