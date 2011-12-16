@@ -1,23 +1,45 @@
-<h3>Chats</h3>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
 
-<table style="width: 800px">
-  <% @chats.each do |chat| %>
-    <tr>
-      <td><a href="/chat/<%= chat["id"] %>"><%= chat["nice_name"][1..-2] %></a></td>
-      <td><%= Time.parse(chat["messages"].last["created_at"]).strftime("%x") %></td>
-      <td><%= Time.parse(chat["messages"].first["created_at"]).strftime("%x") %></td>
-    </tr>
-  <% end %>
-</table>
+	<title><%= @name %></title>
+	
+	<link rel="stylesheet" href="/css/reset.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="/css/main.css" type="text/css" media="screen" id="style">
+</head>
 
-<h3>People</h3>
+<body>
+	<div id="conversation" style="width: 800px; margin-bottom: 500px">
+    <div style="margin-left: 50px; padding:25px">
+      <h2 style="padding-bottom: 20px; font-size:1.5em">Chats</h2>
 
-<table style="width: 800px">
-  <% @sorted_people.each do |user, messages| %>
-    <tr>
-      <td><a href="/user/<%= user %>"><%= user %></a></td>
-      <td><%= messages.length %></td>
-    </tr>
-  <% end %>
-</table>
+      <table style="width: 800px">
+        <% @chats.each do |chat| %>
+          <tr>
+            <td style="width: 500px"><a href="/chat/<%= chat["id"] %>"><%= chat["nice_name"][1..-2] %></a></td>
+            <td style="width: 100px;text-align:right"><%= chat["messages"].length %>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td><%= Time.parse(chat["messages"].last["created_at"]).strftime("%x") %></td>
+            <td><%= Time.parse(chat["messages"].first["created_at"]).strftime("%x") %></td>
+          </tr>
+        <% end %>
+      </table>
+      
+      <h2 style="padding-top: 50px; padding-bottom: 20px; font-size:1.5em">People</h2>
+      
+      <table style="width: 800px">
+        <% @sorted_people.each do |user, messages| %>
+          <tr>
+            <td style="width: 500px"><a href="/user/<%= user %>"><%= user %></a></td>
+            <td style="width: 100px;text-align:right"><%= messages.length %>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td><%= Time.parse(messages.last["created_at"]).strftime("%x") %></td>
+            <td><%= Time.parse(messages.first["created_at"]).strftime("%x") %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+  <div></div>
+</body>
+
 

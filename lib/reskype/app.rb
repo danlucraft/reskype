@@ -4,18 +4,22 @@ chat__The-CalTraks.json
 chat__Platform--API-Team.json
 chat__Contact-Importer-QA-Chat.json
 chat__Cocktail-Chat.json
-chat__Social-Chat.json
-chat__Performance-Chat.json
-chat__SKrimps.json
-chat__Performance-QA.json
 chat__Spotify-Playlist---Songkick-HQ---httpshrt.st9ou.json
-chat__Data-collection.json
 chat__Pontypandy-Fire-Station.json
 chat__SKYRIM.json
+chat__team-getting-the-iphone-app-done.json
+chat__Cocktail-chat.json
+chat__FBIP-Facebook-Intrusion-of-Privacy-1.json
+chat__FBIP-Facebook-Intrusion-of-Privacy.json
+chat__Spotify-Playlist---Songkick-HQ---httpshrt.st9ou.json
+chat__Data-collection.json
+chat__Bugs-and-Spam-egg-sausage-and-spam.json
+chat__curl-httpscrapy-site.com--devnull.json
 TXT
 
 class Reskype
   class App < Sinatra::Base
+    PER_PAGE = 500
     
     def initialize
       load_data
@@ -33,18 +37,16 @@ class Reskype
       @chat_id = params[:chat_id]
       @chat = @chats.detect {|c| c["id"] == @chat_id}
       @total = @chat["messages"].length
-      @page_size = 500
-      @pages = (@total / @page_size) + 1
-      
+      @pages = (@total / PER_PAGE) + 1
+      messages = @chat["messages"].reverse
       if params[:message]
-        if ix = @chat["messages"].map {|m| m["unique_id"]}.index(params[:message].to_i)
-          @page = ix/@page_size
+        if ix = messages.map {|m| m["unique_id"]}.index(params[:message].to_i)
+          @page = ix/PER_PAGE
         end
       end
-      @page ||= (params[:page] || 0).to_i
-      
-      @messages = @chat["messages"][@page*@page_size..(@page + 1)*@page_size]
-      @name = @chat["nice_name"]
+      @page ||= (params[:page] || (@pages - 1)).to_i
+      @messages = messages[@page*PER_PAGE..(@page + 1)*PER_PAGE]
+      @name = @chat["nice_name"][1..-2]
 
       @page_type = "chat"
       @page_id = @chat["id"]
@@ -54,11 +56,11 @@ class Reskype
     
     get "/user/:user_id" do
       @user_id = params[:user_id]
-      @page = (params[:page] || 0).to_i
       @total = @people[@user_id].length
-      @page_size = 500
-      @messages = @people[@user_id][@page*@page_size..(@page + 1)*@page_size]
-      @pages = (@total / @page_size) + 1
+      @pages = (@total / PER_PAGE) + 1
+      @page = (params[:page] || (@pages - 1)).to_i
+      
+      @messages = @people[@user_id].reverse[@page*PER_PAGE..(@page + 1)*PER_PAGE]
       @name = @user_id
       @page_type = "user"
       @page_id = @user_id
@@ -73,9 +75,13 @@ class Reskype
       end
       @chats = []
       Dir[data_dir + "/chat*.json"].each do |json_file|
-        chat = JSON.load(File.read(json_file))
-        if chat["posters"].length > 10 || (EXPLICIT_INCLUDES.any? {|inc| json_file =~ /#{inc}/})
-          @chats << chat
+        begin
+          chat = JSON.load(File.read(json_file))
+          if chat["posters"].length > 10 || (EXPLICIT_INCLUDES.any? {|inc| json_file =~ /#{inc}/})
+            @chats << chat
+          end
+        rescue JSON::ParserError
+          puts "encoding error in #{json_file}"
         end
       end
       

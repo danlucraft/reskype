@@ -3,63 +3,62 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Skype Chat Style Competition</title>
+	<title><%= @name %></title>
 	
-	<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">
-	<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" id="style">
-
-	<script src="js/jquery.min.js"></script>
-	<script src="js/main.js"></script>
-	<script src="js/kit-debug.js"></script>
-	
+	<link rel="stylesheet" href="/css/reset.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="/css/main.css" type="text/css" media="screen" id="style">
 </head>
 
 <body>
-  <p>
-    Showing <%= @page_size %> out of <%= @total %> messages for <%= @name %>. Page <%= @page %> of <%= @pages %>.
-    <br/>
-        
-    <% @pages.times do |i| %>
-      <% if i == @page %>
-        <%= i %>
-      <% else %>
-        <a href="/<%= @page_type %>/<%= @page_id %>?page=<%= i %>"><%= i %></a>
-      <% end %>, 
+	<div id="conversation" style="width: 800px; margin-bottom: 500px">
+    <div style="margin-left: 50px; padding:25px">
+      <h2 style="padding-bottom: 20px; font-size:1.5em"><%= @name %></h2>
+      <p style="padding-bottom: 10px">
+        Showing <%= [Reskype::App::PER_PAGE, @messages.length].min %> out of <%= @total %> messages for <%= @name %>.
+      </p>
+      <p style="padding-bottom: 10px">
+        Page <%= @page + 1 %> of <%= @pages %>.
+      </p>
+      <p>
+        <% @pages.times do |i| %>
+          <% if i == @page %>
+            <%= i + 1 %>
+          <% else %>
+            <a href="/<%= @page_type %>/<%= @page_id %>?page=<%= i %>"><%= i + 1 %></a>
+          <% end %><%= ", " unless i == @pages - 1 %>
+        <% end %>
+      </p>
+    </div>
+  
+      <% previous_sender = nil %>
+      <% @messages.each do |message| %>
+    		<div class="item message in <%= "followup" if previous_sender == message["author"] && !@show_chat_name %>" id="kit">
+    			<div class="container">
+    				<div class="head">
+  					<span class="sender">
+              <span class="profile" data-sender="lucia.ferne"></span>
+              <% if !@show_chat_name %>
+                <a name="<%= message["unique_id"] %>" href="/user/<%= message["author"] %>"><%= message["author"] %></a>
+              <% end %>
+              <% if @show_chat_name %>
+                <a href="/chat/<%= message["chat_id"]%>?message=<%= message["unique_id"] %>#<%= message["unique_id"] %>">
+                  <%= message["chat_name"] %>
+                </a>
+              <% end %>
+            </span>
+  					<span class="time"><%= Time.parse(message["created_at"]).strftime("%d/%m/%Y %H:%M") %></span>
+  				</div>
+  				<div class="body">
+            <% if ["", nil].include? message["identities"] %>
+              <%= message["body"] %>
+            <% elsif !message["identities"].include?(" ") %>
+              <%= message["author"] %> added <%= message["identities"] %> to the chat
+            <% end %>
+          </div>
+  			</div>
+  		</div>		
+      <% previous_sender = message["author"] %>
     <% end %>
-  </p>
-
-	<div id="conversation">
-
-		
-		<div class="item message in" id="kit">
-			<div class="container">
-				<div class="head">
-					<span class="sender"><span class="profile" data-sender="lucia.ferne"></span><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar" data-sender="lucia.ferne" alt=""><a href="lucia.ferne">Lucia Ferne (work account)</a></span>
-					<span class="time">11.05.2009 14:37</span>
-					<button class="actions" title="Actions"></button>
-				</div>
-				<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. <img src="_kit-tmp/smile.gif" alt=":)" title=":)" class="emoticon"> Praesent varius laoreet tellus, facilisis pharetra dolor pretium molestie. Nulla bibendum suscipit est, ullamcorper pharetra dui blandit et. Praesent pretium, ligula non feugiat suscipit, <a href="http://www.skype.com/?<!--#config timefmt="%d%m%Y%H%M%S" --><!--#echo var="DATE_LOCAL" -->">Aenean sed urna metus</a>, eget auctor arcu risus in nibh. Donec a purus nisi. <a href="http://www.skype.com/">Aenean sed urna metus</a>. Nunc convallis porta augue, in aliquam tortor dapibus at.</div>
-			</div>
-		</div>		
-    
-	<div id="conversation">
-  <% @messages.each do |message| %>
-    <tr>
-      <td><a name="<%= message["unique_id"] %>" href="/user/<%= message["author"] %>"><%= message["author"] %></a></td>
-      <td style="width: 120px"><%= Time.parse(message["created_at"]).strftime("%x %X") %></td>
-      <% if @show_chat_name %>
-        <td style="width: 100px">
-          <a href="/chat/<%= message["chat_id"]%>?message=<%= message["unique_id"] %>#<%= message["unique_id"] %>">
-            <%= message["chat_name"][0..10] %><%= "..." if message["chat_name"].length > 10 %>
-          </a>
-        </td>
-      <% end %>
-      <% if ["", nil].include? message["identities"] %>
-        <td><%= message["body"] %></td>
-      <% elsif !message["identities"].include?(" ") %>
-        <td><%= message["author"] %> added <%= message["identities"] %> to the chat</td>
-      <% end %>
-      
-    </tr>
-  <% end %>
-</ul>
+  </div>
+</body>
+</html>

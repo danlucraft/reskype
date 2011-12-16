@@ -6,16 +6,17 @@ class Reskype
     end
     
     def chatmsg_files
-      Dir[@dir + "/chatmsg*.dbb"]
+      Dir[@dir + "/**/chatmsg*.dbb"]
     end
 
     def chat_files
-      Dir[@dir + "/chat*.dbb"].reject {|f| f =~ /chat(msg|member)/}
+      Dir[@dir + "/**/chat*.dbb"].reject {|f| f =~ /chat(msg|member)/}
     end
 
     def messages
       @messages ||= begin
         chatmsg_files.map { |file|
+          puts file
           MsgParser.new(File.open(file, "rb") {|f| f.read }).messages
         }.flatten.map {|h| Message.new(h)}
       end
@@ -23,20 +24,19 @@ class Reskype
     
     def chats
       @chats ||= begin
-        chat_files.map { |file| 
-          ChatParser.new(File.open(file, "rb") {|f| f.read }).chats
-        }.flatten.map {|h| Chat.new(h)}
-      end
-    end
-    
-    def old_chats
-      @chats ||= begin
         chats = {}
+        chat_files.each do |file| 
+          ChatParser.new(File.open(file, "rb") {|f| f.read }).chats.each do |h|
+            chat = Chat.new(h)
+            chats[chat.name] = chat
+          end
+        end
         messages.each do |message|
-          chats[message.chatname] ||= Chat.new(message.chatname)
+          chats[message.chatname] ||= Chat.new(:topic => message.chatname)
           chats[message.chatname].messages << message
         end
-        chats.values.each {|c| c.messages.sort_by {|m| m.created_at}.reverse}
+        r = chats.values
+        r.each {|c| c.sort_messages}
       end
     end
     
@@ -103,6 +103,10 @@ class Reskype
 
       def posters
         (@hash[:posters] || "").split(" ")
+      end
+      
+      def sort_messages
+        @messages = @messages.sort_by {|m| m.created_at}.reverse
       end
     end
     

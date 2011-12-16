@@ -10,6 +10,7 @@ main_db_paths = Dir[File.expand_path(user_dir) + "/*main.db"]
 chats = []
 
 main_db_paths.each do |main_db_path|
+  puts main_db_path
   reskype5 = Reskype::Skype5.new(main_db_path)
   chats += Reskype.export(reskype5.chats)
 end
@@ -33,7 +34,11 @@ chats.each do |chat|
   end
   File.open(path+".json", "w") do |f|
     chat_info = Reskype.chat_to_hash(chat)
-    f.puts JSON.pretty_generate(chat_info)
+    begin
+      f.puts JSON.pretty_generate(chat_info)
+    rescue Encoding::UndefinedConversionError
+      puts "undefined encoding error in #{chat.name}"
+    end
   end
 end
 
