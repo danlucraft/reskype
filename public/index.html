@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Skype Chat Style Competition</title>
+	
+	<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" id="style">
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/kit-debug.js"></script>
+	
+</head>
+
+<body>
+
+	<div id="conversation">
+		
+		<!-- Loading history -->
+		
+		<div class="item history" id="kit">
+			<div class="container">
+				<div class="body"><a href="0" class="load-ealier">View earlier messages</a></div>
+			</div>
+		</div>
+		
+		<div class="item history" id="kit">
+			<div class="container">
+				<div class="body">View earlier messages
+					<span class="history-more"><a href="1">Yesterday</a><span class="vertical-separator"></span><a href="7">7 days</a><span class="vertical-separator"></span><a href="30">30 days</a><span class="vertical-separator"></span><a href="90">3 months</a><span class="vertical-separator"></span><a href="90">6 months</a><span class="vertical-separator"></span><a href="90">9 months</a><span class="vertical-separator"></span><a href="90">1 year</a><span class="vertical-separator"></span></span></div>
+			</div>
+		</div>
+		
+		<!-- Topic -->
+		
+		<div class="item topic" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="time">Today 3:45 AM</span>
+				</div>
+				<div class="body">Lucia Ferne changed the conversation title to <span>Skype Chat Style competition</span></div>
+			</div>
+		</div>
+		
+		<!-- Emote -->
+		
+		<div class="item emote" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><a href="ralph.taylor"><img src="_kit-tmp/ralph.taylor.png" class="avatar"></a></span>
+					<span class="time">Today 5:11 AM</span>
+				</div>
+				<div class="body">Ralph Taylor is having so much fun developing a new chat style for Skype</div>
+			</div>
+		</div>
+		
+		<!-- Alerts -->
+		
+		<div class="item alert" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="time">14:02</span>
+				</div>
+				<div class="body">Jennifer Taylor is on a mobile device and may not be able to receive chats right now.</div>
+			</div>
+		</div>
+		
+		<div class="item alert" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="time">14:02</span>
+				</div>
+				<div class="body">Only messages containing “skype” will produce notifications in this chat.</div>
+			</div>
+		</div>
+		
+		<div class="item alert" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="time">14:02</span>
+				</div>
+				<div class="body">Jack Ferne has left the conversation.</div>
+			</div>
+		</div>
+		
+		<div class="item alert" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="time">14:02</span>
+				</div>
+				<div class="body">All other participants have left the conversation.</div>
+			</div>
+		</div>
+		
+		<!-- Incoming messages -->
+		
+		<div class="item message in read" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="lucia.ferne"></span><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar" data-sender="lucia.ferne" alt=""><a href="lucia.ferne">Lucia Ferne (work account)</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, <span class="highlight">consectetur</span> adipiscing elit.</div>
+			</div>
+		</div>
+		
+		<div class="item message in read" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="lucia.ferne"></span><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar" data-sender="lucia.ferne" alt=""><a href="lucia.ferne">Lucia Ferne (work account)</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body"><img src="_kit-tmp/smile.gif" alt=":)" title=":)" class="emoticon"></div>
+			</div>
+		</div>
+		
+		<div class="item message in read" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="lucia.ferne"></span><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar" data-sender="lucia.ferne" alt=""><a href="lucia.ferne">Lucia Ferne (work account)</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body"><img src="_kit-tmp/smile.gif" alt=":)" title=":)" class="emoticon"><br><img src="_kit-tmp/smile.gif" alt=":)" title=":)" class="emoticon"></div>
+			</div>
+		</div>
+
+		<div class="item message in" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="lucia.ferne"></span><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar" data-sender="lucia.ferne" alt=""><a href="lucia.ferne">Lucia Ferne (work account)</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. <img src="_kit-tmp/smile.gif" alt=":)" title=":)" class="emoticon"> Praesent varius laoreet tellus, facilisis pharetra dolor pretium molestie. Nulla bibendum suscipit est, ullamcorper pharetra dui blandit et. Praesent pretium, ligula non feugiat suscipit, <a href="http://www.skype.com/?<!--#config timefmt="%d%m%Y%H%M%S" --><!--#echo var="DATE_LOCAL" -->">Aenean sed urna metus</a>, eget auctor arcu risus in nibh. Donec a purus nisi. <a href="http://www.skype.com/">Aenean sed urna metus</a>. Nunc convallis porta augue, in aliquam tortor dapibus at.</div>
+			</div>
+		</div>
+
+		<div class="item message in" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="lucia.ferne"></span><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar" data-sender="lucia.ferne" alt=""><a href="lucia.ferne">Lucia Ferne (work account)</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent varius laoreet tellus, facilisis pharetra dolor pretium molestie. Nulla bibendum suscipit est, ullamcorper pharetra dui blandit et.<br><br>
+					Praesent pretium, ligula non feugiat suscipit, turpis sem pulvinar sapien, eget auctor arcu risus in nibh. Donec a purus nisi. Aenean sed urna metus. Nunc convallis porta augue, in aliquam tortor dapibus at.</div>
+			</div>
+		</div>
+		
+		<div class="item message in edited" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="lucia.ferne"></span><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar" data-sender="lucia.ferne" alt=""><a href="lucia.ferne">Lucia Ferne (work account)</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent varius laoreet tellus, facilisis pharetra dolor pretium molestie. Nulla bibendum suscipit est, ullamcorper pharetra dui blandit et.</div>
+			</div>
+		</div>
+
+		<div class="item message in followup" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="lucia.ferne"></span><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar" data-sender="lucia.ferne" alt=""><a href="lucia.ferne">Lucia Ferne (work account)</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent varius laoreet tellus, facilisis pharetra dolor pretium molestie. Nulla bibendum suscipit est, ullamcorper pharetra dui blandit et.</div>
+			</div>
+		</div>
+		
+		<div class="item message in followup edited" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="lucia.ferne"></span><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar" data-sender="lucia.ferne" alt=""><a href="lucia.ferne">Lucia Ferne (work account)</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+			</div>
+		</div>
+		
+		<div class="item message in followup edited deleted" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="lucia.ferne"></span><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar" data-sender="lucia.ferne" alt=""><a href="lucia.ferne">Lucia Ferne (work account)</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body">This message has been removed</div>
+			</div>
+		</div>
+
+		<div class="item message in" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="lucia.ferne"></span><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar" data-sender="lucia.ferne" alt=""><a href="lucia.ferne">Lucia Ferne (work account)</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body">Loremipsumdolorsitametconsecteturadipiscingelitnullainjustoaliquamodiotempusiaculisneceuestsuspendisserhoncusnislinlectusfermentummolliscrasaligulasedauguepretiumpellentesqueetutmetussedvelsapieninrisustinciduntgravidamorbimiturpisluctusegetvulputatevitaeconvallisegetarcuvestibulumsitametorciidarcupellentesquefeugiatnullarhoncusleovitaeanteiaculisutvulputatequamgravidaaliquamcondimentumnequevelnibhsemperquispretiumlectuseuismodsedultricesportaeratattempuspurussemperquisaeneanaliquetvariusluctusproineratfelismolestieincommodoullamcorperpharetraportaurnamaurisscelerisquecongueultriciesproinmalesuadaauguevitaetemporsollicitudinlacusdiamsodalessapienuteuismodurnaturpisfringillaenim.</div>
+			</div>
+		</div>
+		
+		
+		<!-- Outgoing messages -->
+		
+		<div class="item message out read" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="ralph.taylor"></span><img src="_kit-tmp/avatar-ralph.taylor.png" class="avatar" data-sender="ralph.taylor" alt=""><a href="ralph.taylor">Ralph Taylor</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, <span class="highlight">consectetur</span> adipiscing elit.</div>
+			</div>
+		</div>
+		
+		<div class="item message out" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="ralph.taylor"></span><img src="_kit-tmp/avatar-ralph.taylor.png" class="avatar" data-sender="ralph.taylor" alt=""><a href="ralph.taylor">Ralph Taylor</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body"><img src="_kit-tmp/smile.gif" alt=":)" title=":)" class="emoticon"></div>
+			</div>
+		</div>
+		
+		<div class="item message out" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="ralph.taylor"></span><img src="_kit-tmp/avatar-ralph.taylor.png" class="avatar" data-sender="ralph.taylor" alt=""><a href="ralph.taylor">Ralph Taylor</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body"><img src="_kit-tmp/smile.gif" alt=":)" title=":)" class="emoticon"><br><img src="_kit-tmp/smile.gif" alt=":)" title=":)" class="emoticon"></div>
+			</div>
+		</div>
+
+		<div class="item message out" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="ralph.taylor"></span><img src="_kit-tmp/avatar-ralph.taylor.png" class="avatar" data-sender="ralph.taylor" alt=""><a href="ralph.taylor">Ralph Taylor</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. <img src="_kit-tmp/smile.gif" alt=":)" title=":)" class="emoticon"> Praesent varius laoreet tellus, facilisis pharetra dolor pretium molestie. Nulla bibendum suscipit est, ullamcorper pharetra dui blandit et. Praesent pretium, ligula non feugiat suscipit, <a href="http://www.skype.com/?<!--#config timefmt="%d%m%Y%H%M%S" --><!--#echo var="DATE_LOCAL" -->">Aenean sed urna metus</a>, eget auctor arcu risus in nibh. Donec a purus nisi. <a href="http://www.skype.com/">Aenean sed urna metus</a>. Nunc convallis porta augue, in aliquam tortor dapibus at.</div>
+			</div>
+		</div>
+
+		<div class="item message out" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="ralph.taylor"></span><img src="_kit-tmp/avatar-ralph.taylor.png" class="avatar" data-sender="ralph.taylor" alt=""><a href="ralph.taylor">Ralph Taylor</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent varius laoreet tellus, facilisis pharetra dolor pretium molestie. Nulla bibendum suscipit est, ullamcorper pharetra dui blandit et.<br><br>
+					Praesent pretium, ligula non feugiat suscipit, turpis sem pulvinar sapien, eget auctor arcu risus in nibh. Donec a purus nisi. Aenean sed urna metus. Nunc convallis porta augue, in aliquam tortor dapibus at.</div>
+			</div>
+		</div>
+		
+		<div class="item message out followup" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="ralph.taylor"></span><img src="_kit-tmp/avatar-ralph.taylor.png" class="avatar" data-sender="ralph.taylor" alt=""><a href="ralph.taylor">Ralph Taylor</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent varius laoreet tellus, facilisis pharetra dolor pretium molestie. Nulla bibendum suscipit est, ullamcorper pharetra dui blandit et.</div>
+			</div>
+		</div>
+		
+		<div class="item message out edited" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="ralph.taylor"></span><img src="_kit-tmp/avatar-ralph.taylor.png" class="avatar" data-sender="ralph.taylor" alt=""><a href="ralph.taylor">Ralph Taylor</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+			</div>
+		</div>
+		
+		<div class="item message out followup edited" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="ralph.taylor"></span><img src="_kit-tmp/avatar-ralph.taylor.png" class="avatar" data-sender="ralph.taylor" alt=""><a href="ralph.taylor">Ralph Taylor</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+			</div>
+		</div>
+		
+		<div class="item message out followup edited deleted" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="ralph.taylor"></span><img src="_kit-tmp/avatar-ralph.taylor.png" class="avatar" data-sender="ralph.taylor" alt=""><a href="ralph.taylor">Ralph Taylor</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body">This message has been removed</div>
+			</div>
+		</div>
+
+
+		<div class="item message out" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><span class="profile" data-sender="ralph.taylor"></span><img src="_kit-tmp/avatar-ralph.taylor.png" class="avatar" data-sender="ralph.taylor" alt=""><a href="ralph.taylor">Ralph Taylor</a></span>
+					<span class="time">11.05.2009 14:37</span>
+					<button class="actions" title="Actions"></button>
+				</div>
+				<div class="body">Loremipsumdolorsitametconsecteturadipiscingelitnullainjustoaliquamodiotempusiaculisneceuestsuspendisserhoncusnislinlectusfermentummolliscrasaligulasedauguepretiumpellentesqueetutmetussedvelsapieninrisustinciduntgravidamorbimiturpisluctusegetvulputatevitaeconvallisegetarcuvestibulumsitametorciidarcupellentesquefeugiatnullarhoncusleovitaeanteiaculisutvulputatequamgravidaaliquamcondimentumnequevelnibhsemperquispretiumlectuseuismodsedultricesportaeratattempuspurussemperquisaeneanaliquetvariusluctusproineratfelismolestieincommodoullamcorperpharetraportaurnamaurisscelerisquecongueultriciesproinmalesuadaauguevitaetemporsollicitudinlacusdiamsodalessapienuteuismodurnaturpisfringillaenim.</div>
+			</div>
+		</div>
+		
+		<!-- Incoming SMS -->
+		
+		<div class="item sms in read" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">SMS from +372 999999</span>
+					<span class="time">11.05.2009 14:37</span>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+			</div>
+		</div>
+		
+		<div class="item sms in" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">SMS from +372 50 90960</span>
+					<span class="time">11.05.2009 14:37</span>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+			</div>
+		</div>
+		
+		<!-- Outgoing SMS -->
+
+		<div class="item sms out read" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">SMS to +44 432432532</span>
+					<span class="time">11.05.2009 14:37</span>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+			</div>
+		</div>
+		
+		<div class="item sms out" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">SMS to +44 432432532</span>
+					<span class="time">11.05.2009 14:37</span>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+			</div>
+		</div>
+		
+		<div class="item sms out" id="test08-1">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Home: +372 99 99999</span>
+					<span class="time sending">Sending</span>
+				</div>
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Office: +372 99 99999</span>
+					<span class="time failed">Failed</span>
+				</div>
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Mobile: +372 99 99999</span>
+					<span class="time">Sent 11.05.2009 14:37</span>
+				</div>
+				<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+			</div>
+		</div>
+		
+		
+		<!-- Calls -->
+				
+		<div class="item call start" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar"></span>
+					<span class="time">Yesterday 12:00 AM</span>
+				</div>
+				<div class="body">Call Started</div>
+			</div>
+		</div>
+		
+		<div class="item call end" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar"></span>
+					<span class="time">Yesterday 12:02 AM</span>
+				</div>
+				<div class="body">Call Ended<span class="duration">2 minutes</span></div>
+			</div>
+		</div>
+		
+		<!-- Skypecalls -->
+		
+		<div class="item call start" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar" data-sender="lucia.ferne" alt=""><a href="lucia.ferne"></a></span>
+					<span class="time">Yesterday 12:00 AM</span>
+				</div>
+				<div class="body">Call Started</div>
+			</div>
+		</div>
+		
+		<div class="item call end" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar" data-sender="lucia.ferne" alt=""><a href="lucia.ferne"></a></span>
+					<span class="time">Yesterday 12:02 AM</span>
+				</div>
+				<div class="body">Call Ended<span class="duration">2 minutes</span></div>
+			</div>
+		</div>
+
+		<!-- Voicemail -->
+		
+		<div class="item voicemail new" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><a href="lucia.ferne"><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar">Lucia Ferne left you a voicemail</a></span>
+					<span class="time">Yesterday 11:29 AM</span>
+					<span class="new"><span></span></span>
+				</div>
+				<div class="body">
+					<button class="control play" title="Play/stop"></button>
+					<button class="delete" title="Delete"></button>
+					<span class="progressbar">
+						<span class="total"></span>
+						<span class="progress hidden">
+							<span class="playhead"><span></span></span>
+						</span>
+					</span>
+					<span class="played">0:00</span>
+					<span class="duration">1:32</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item voicemail" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><a href="lucia.ferne"><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar">Lucia Ferne left you a voicemail</a></span>
+					<span class="time">Yesterday 11:29 AM</span>
+					<span class="new"><span></span></span>
+				</div>
+				<div class="body">
+					<button class="control play" title="Play/stop"></button>
+					<button class="delete" title="Delete"></button>
+					<span class="progressbar">
+						<span class="total"></span>
+						<span class="progress hidden">
+							<span class="playhead"><span></span></span>
+						</span>
+					</span>
+					<span class="played">0:00</span>
+					<span class="duration">1:32</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item voicemail" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">+1 990 24342 left you a voicemail</span>
+					<span class="time">Yesterday 11:29 AM</span>
+					<span class="new"><span></span></span>
+				</div>
+				<div class="body">
+					<button class="control stop" title="Play/stop"></button>
+					<button class="delete" title="Delete"></button>
+					<span class="progressbar">
+						<span class="total"></span>
+						<span class="progress" style="width: 50%">
+							<span class="playhead"><span></span></span>
+						</span>
+					</span>
+					<span class="played">0:39</span>
+					<span class="duration">1:18</span>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Incoming file transfers -->
+				
+		<div class="item transfer in" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar">Lucia Ferne is sending you a file</span>
+					<span class="time">Yesterday 11:29 AM</span>
+				</div>
+				<div class="body">
+					<div class="main instance">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="pill accept"><span>Accept</span></button>
+						<button class="pill decline"><span>Decline</span></button>
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">Chatstyle-competition-rules.pdf</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress"></span>
+						</span>
+						<span class="size">700 kB</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item transfer in" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar">Lucia Ferne is sending you a file</span>
+					<span class="time">Yesterday 11:29 AM</span>
+				</div>
+				<div class="body">
+					<div class="main instance running">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="pill accept"><span>Accept</span></button>
+						<button class="pill decline"><span>Decline</span></button>
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">Chatstyle-competition-rules.pdf</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 67%"></span>
+						</span>
+						<span class="size">1.5 of 2.5 MB – 2 minutes remaining</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item transfer in" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar">Lucia Ferne is sending you a file</span>
+					<span class="time">Yesterday 11:29 AM</span>
+				</div>
+				<div class="body">
+					<div class="main instance completed">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="pill accept"><span>Accept</span></button>
+						<button class="pill decline"><span>Decline</span></button>
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">Chatstyle-competition-rules.pdf</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress"></span>
+						</span>
+						<span class="size">2.5 MB</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item transfer in" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar">Lucia Ferne is sending you files</span>
+					<span class="time">09/27/10 12:00 AM</span>
+				</div>
+				<div class="body">
+					<div class="main instance">
+						<img class="icon" src="gfx/transfer-multiple-32.png">
+						<button class="pill accept"><span>Accept</span></button>
+						<button class="pill decline"><span>Decline</span></button>
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">2 Files</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="pill accept"><span>Accept</span></button>
+						<button class="pill decline"><span>Decline</span></button>
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">New-style.zip</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="pill accept"><span>Accept</span></button>
+						<button class="pill decline"><span>Decline</span></button>
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">New-style-updated.zip</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item transfer in" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar">Lucia Ferne is sending you files</span>
+					<span class="time">09/27/10 12:00 AM</span>
+				</div>
+				<div class="body">
+					<div class="main instance running">
+						<img class="icon" src="gfx/transfer-multiple-32.png">
+						<button class="pill accept"><span>Accept</span></button>
+						<button class="pill decline"><span>Decline</span></button>
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">2 Files</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance running">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="pill accept"><span>Accept</span></button>
+						<button class="pill decline"><span>Decline</span></button>
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">New-style.zip</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance completed">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="pill accept"><span>Accept</span></button>
+						<button class="pill decline"><span>Decline</span></button>
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">New-style-updated.zip</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item transfer in" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar">Lucia Ferne sent you files</span>
+					<span class="time missing">Not available on this computer</span>
+				</div>
+				<div class="body">
+					<div class="main instance completed missing">
+						<img class="icon" src="gfx/transfer-multiple-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">2 Files</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress hidden"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance completed missing">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">New-style.zip</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance completed missing">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">New-style-updated.zip</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item transfer in" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar">Lucia Ferne sent you files</span>
+					<span class="time missing">Not available on this computer</span>
+				</div>
+				<div class="body">
+					<div class="main instance completed missing">
+						<img class="icon" src="gfx/transfer-multiple-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">2 Files</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress hidden"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance completed missing">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">New-style.zip</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance completed missing">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">New-style-updated.zip</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item transfer in" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/avatar-lucia.ferne.png" class="avatar">Lucia Ferne sent you files</span>
+					<span class="time missing">Not available on this computer</span>
+				</div>
+				<div class="body">
+					<div class="main instance connecting">
+						<img class="icon" src="gfx/transfer-multiple-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">2 Files</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress hidden"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance connecting">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">New-style.zip</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress hidden"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Outgoing file transfer -->
+		
+		<div class="item transfer out" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Sending file to Jack Ferne</span>
+					<span class="time">Yesterday 11:29 AM</span>
+				</div>
+				<div class="body">
+					<div class="main instance">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">Chatstyle-competition-rules.pdf</span>
+						<span class="progressbar waiting">
+							<span class="total"></span>
+							<span class="progress hidden"></span>
+						</span>
+						<span class="size">Waiting for Ferdinand Alexander Porsche to accept&hellip;</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item transfer out" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Sending file to Jack Ferne</span>
+					<span class="time">Yesterday 11:29 AM</span>
+				</div>
+				<div class="body">
+					<div class="main instance running">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">Chatstyle-competition-rules.pdf</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">199kB of 18 MB – 16 hours remaining</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item transfer out" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Sending file to Jack Ferne</span>
+					<span class="time">Yesterday 11:29 AM</span>
+				</div>
+				<div class="body">
+					<div class="main instance completed">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">Thisfilenameisextrmelyongandmostoofitisalsaoonewordsotheresnohyphenation.doc</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item transfer out" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Sending file to Jack Ferne</span>
+					<span class="time failed">Failed</span>
+				</div>
+				<div class="body">
+					<div class="main instance completed">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">Chatstyle-competition-rules.pdf</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item transfer out" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Sending file to Jack Ferne</span>
+					<span class="time rejected">Rejected</span>
+				</div>
+				<div class="body">
+					<div class="main instance completed">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">Chatstyle-competition-rules.pdf</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item transfer out" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Sending file to Jack Ferne</span>
+					<span class="time sending">Sending 6.0 of 10 MB</span>
+				</div>
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Sending file to Fredrick Long</span>
+					<span class="time sending">Sending 6.0 of 10 MB</span>
+				</div>
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Sending file to Helen Manchester</span>
+					<span class="time sending">Sending 6.0 of 10 MB</span>
+				</div>
+				<div class="body">
+					<div class="main instance">
+						<img class="icon" src="gfx/transfer-multiple-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">Chatstyle-competition-rules.pdf</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item transfer out" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Sending files to Jack Ferne</span>
+					<span class="time sending">Sending 6.0 of 10 MB</span>
+				</div>
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Sending files to Fredrick Long</span>
+					<span class="time rejected">Rejected</span>
+				</div>
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Sending files to Helen Manchester</span>
+					<span class="time sending">Sending 6.0 of 10 MB</span>
+				</div>
+				<div class="body">
+					<div class="main instance">
+						<img class="icon" src="gfx/transfer-multiple-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">2 Files</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">New-style.zip</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance completed">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">New-style-updated.zip</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item transfer out" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Sending files to Jack Ferne</span>
+					<span class="time sending">Sending 6.0 of 10 MB</span>
+				</div>
+				<div class="body">
+					<div class="main instance">
+						<img class="icon" src="gfx/transfer-multiple-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">2 Files</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress hidden"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">Chatstyle-competition-rules.pdf</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress hidden"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">Chatstyle-competition-rules-updated.pdf</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress hidden"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item transfer out" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Sending files to Jack Ferne</span>
+					<span class="time rejected">Rejected</span>
+				</div>
+				<div class="body">
+					<div class="main instance completed">
+						<img class="icon" src="gfx/transfer-multiple-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">2 Files</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress hidden"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance completed">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">Chatstyle-competition-rules.pdf</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance completed">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">Chatstyle-competition-rules-updated.pdf</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="item transfer out" id="kit">
+			<div class="container">
+				<div class="head">
+					<span class="sender"><img src="_kit-tmp/icon-ph.png" class="avatar">Sending files to Jack Ferne</span>
+					<span class="time missing">Not available on this computer</span>
+				</div>
+				<div class="body">
+					<div class="main instance completed missing">
+						<img class="icon" src="gfx/transfer-multiple-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">2 Files</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress hidden"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance completed missing">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">Chatstyle-competition-rules.pdf</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+					<div class="sub instance completed missing">
+						<img class="icon" src="gfx/transfer-32.png">
+						<button class="cancel" title="Cancel"></button>
+						<button class="quicklook" title="Quicklook"></button>
+						<button class="reveal" title="Reveal in Finder"></button>
+						<span class="name">Chatstyle-competition-rules-updated.pdf</span>
+						<span class="progressbar">
+							<span class="total"></span>
+							<span class="progress" style="width: 8%"></span>
+						</span>
+						<span class="size">18 MB</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Typing indicator -->
+		
+		<div class="item typing invisible" id="typing">
+			<div class="container">
+				<div class="head">
+					<span class="sender"></span>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+
+</body>
+</html>
