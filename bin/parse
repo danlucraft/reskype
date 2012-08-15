@@ -3,8 +3,30 @@
 $:.unshift(File.expand_path("../../lib", __FILE__))
 require 'reskype'
 
+def usage
+  puts "USAGE: ruby bin/parse SKYPE_DIR TARGET_DIR"
+  puts
+  puts "on OSX SKYPE_DIR is likely to be /Users/dan/Library/Application\ Support/Skype/URUSERNAME/"
+  puts "TARGET_DIR is an existing, should be empty, directory where the parsed chat files will be placed"
+  exit
+end
+
+if ARGV.include?("-h") or ARGV.include?("--help")
+  usage
+end
+
 user_dir = ARGV[0]
+unless user_dir and File.exist?(user_dir)
+  puts "SKYPE_DIR not found"
+  usage
+end
+
 target_dir = ARGV[1]
+unless target_dir and File.exist?(target_dir) and File.directory?(target_dir)
+  puts "TARGET_DIR not found"
+  usage
+end
+
 main_db_paths = Dir[File.expand_path(user_dir) + "/*main.db"]
 
 chats = []
