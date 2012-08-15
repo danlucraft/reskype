@@ -59,8 +59,12 @@ class Reskype
       @total = @people[@user_id].length
       @pages = (@total / PER_PAGE) + 1
       @page = (params[:page] || (@pages - 1)).to_i
-      
-      @messages = @people[@user_id].reverse[@page*PER_PAGE..(@page + 1)*PER_PAGE]
+      if @user_id == "grillpanda"
+        messages = []
+      else
+        messages = @people[@user_id]
+      end
+      @messages = messages.reverse[@page*PER_PAGE..(@page + 1)*PER_PAGE]
       @name = @user_id
       @page_type = "user"
       @page_id = @user_id

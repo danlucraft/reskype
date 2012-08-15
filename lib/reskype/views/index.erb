@@ -10,17 +10,19 @@
 </head>
 
 <body>
-	<div id="conversation" style="width: 800px; margin-bottom: 500px">
+	<div id="conversation" style="width: 800px; margin-bottom: 100px">
     <div style="margin-left: 50px; padding:25px">
       <h2 style="padding-bottom: 20px; font-size:1.5em">Chats</h2>
 
       <table style="width: 800px">
         <% @chats.each do |chat| %>
           <tr>
-            <td style="width: 500px"><a href="/chat/<%= chat["id"] %>"><%= chat["nice_name"][1..-2] %></a></td>
+            <td style="width: 500px">
+              <a href="/chat/<%= chat["id"] %>"><%= chat["nice_name"][1..-2] %></a>
+            </td>
             <td style="width: 100px;text-align:right"><%= chat["messages"].length %>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td><%= Time.parse(chat["messages"].last["created_at"]).strftime("%x") %></td>
-            <td><%= Time.parse(chat["messages"].first["created_at"]).strftime("%x") %></td>
+            <td><%= Time.parse(chat["messages"].last["created_at"]).strftime("%d/%m/%Y") %></td>
+            <td><%= Time.parse(chat["messages"].first["created_at"]).strftime("%d/%m/%Y") %></td>
           </tr>
         <% end %>
       </table>
@@ -30,10 +32,16 @@
       <table style="width: 800px">
         <% @sorted_people.each do |user, messages| %>
           <tr>
-            <td style="width: 500px"><a href="/user/<%= user %>"><%= user %></a></td>
+            <td style="width: 500px">
+              <% if user == "grillpanda" %>
+                grillpanda
+              <% else %>
+                <a href="/user/<%= user %>"><%= user %></a>
+              <% end %>
+            </td>
             <td style="width: 100px;text-align:right"><%= messages.length %>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td><%= Time.parse(messages.last["created_at"]).strftime("%x") %></td>
-            <td><%= Time.parse(messages.first["created_at"]).strftime("%x") %></td>
+            <td><%= Time.parse(messages.last["created_at"]).strftime("%d/%m/%Y") %></td>
+            <td><%= Time.parse(messages.first["created_at"]).strftime("%d/%m/%Y") %></td>
           </tr>
         <% end %>
       </table>

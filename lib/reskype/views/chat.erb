@@ -10,7 +10,7 @@
 </head>
 
 <body>
-	<div id="conversation" style="width: 800px; margin-bottom: 500px">
+	<div id="conversation" style="width: 800px; margin-bottom: 100px">
     <div style="margin-left: 50px; padding:25px">
       <h2 style="padding-bottom: 20px; font-size:1.5em"><%= @name %></h2>
       <p style="padding-bottom: 10px">
@@ -49,10 +49,14 @@
   					<span class="time"><%= Time.parse(message["created_at"]).strftime("%d/%m/%Y %H:%M") %></span>
   				</div>
   				<div class="body">
-            <% if ["", nil].include? message["identities"] %>
-              <%= message["body"] %>
-            <% elsif !message["identities"].include?(" ") %>
-              <%= message["author"] %> added <%= message["identities"] %> to the chat
+            <% if message["author"] == "grillpanda"%>
+              <i style="font-style:italic; color:grey;">Message hidden.</i>
+            <% else %>
+              <% if ["", nil].include? message["identities"] %>
+                <%= message["body"] %>
+              <% elsif !message["identities"].include?(" ") %>
+                <%= message["author"] %> added <%= message["identities"] %> to the chat
+              <% end %>
             <% end %>
           </div>
   			</div>
