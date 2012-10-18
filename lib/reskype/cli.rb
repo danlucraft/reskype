@@ -1,7 +1,9 @@
 class Reskype
 	class CLI
 		def usage
-			puts "USAGE: ruby bin/parse process SKYPE_DIR TARGET_DIR"
+			puts "USAGE: ruby bin/parse import SKYPE_DB"
+			puts "       ruby bin/parse import5 SKYPE_DB"
+			puts "       ruby bin/parse import3 SKYPE_DB"
 			puts "       ruby bin/parse debug5 SKYPE_DB"
 			puts
 			puts "on OSX SKYPE_DIR is likely to be /Users/dan/Library/Application\ Support/Skype/URUSERNAME/"
