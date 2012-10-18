@@ -33,11 +33,7 @@
         <% @sorted_people.each do |user, messages| %>
           <tr>
             <td style="width: 500px">
-              <% if user == "grillpanda" %>
-                grillpanda
-              <% else %>
-                <a href="/user/<%= user %>"><%= user %></a>
-              <% end %>
+              <a href="/user/<%= user %>"><%= user %></a>
             </td>
             <td style="width: 100px;text-align:right"><%= messages.length %>&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td><%= Time.parse(messages.last["created_at"]).strftime("%d/%m/%Y") %></td>

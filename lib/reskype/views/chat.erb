@@ -49,14 +49,10 @@
   					<span class="time"><%= Time.parse(message["created_at"]).strftime("%d/%m/%Y %H:%M") %></span>
   				</div>
   				<div class="body">
-            <% if message["author"] == "grillpanda"%>
-              <i style="font-style:italic; color:grey;">Message hidden.</i>
-            <% else %>
-              <% if ["", nil].include? message["identities"] %>
-                <%= message["body"] %>
-              <% elsif !message["identities"].include?(" ") %>
-                <%= message["author"] %> added <%= message["identities"] %> to the chat
-              <% end %>
+            <% if ["", nil].include? message["identities"] %>
+              <%= message["body"] %>
+            <% elsif !message["identities"].include?(" ") %>
+              <%= message["author"] %> added <%= message["identities"] %> to the chat
             <% end %>
           </div>
   			</div>
