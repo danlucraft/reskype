@@ -21,6 +21,7 @@ create table "messages" (
 	identities text,
 	created_at datetime
 );
-create index ix_messages_user_id on messages (user_id);
-create index ix_messages_chat_id on messages (chat_id);
+create index ix_messages_user_id on messages (user_id, created_at);
+create index ix_messages_chat_id on messages (chat_id, created_at);
+create index ix_messages_time on messages (created_at);
 

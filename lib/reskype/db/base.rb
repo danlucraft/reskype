@@ -7,7 +7,7 @@ module Reskype
 
 			def initialize(filename=DEFAULT_DB_PATH)
 				@filename = filename
-				Sequel::Model.db = Sequel.sqlite(DEFAULT_DB_PATH)
+				Sequel::Model.db = Sequel.sqlite(DEFAULT_DB_PATH, :logger => Logger.new(STDOUT))
 				require 'reskype/models'
 			end
 
@@ -17,6 +17,10 @@ module Reskype
 
 			def migrate
 				system("cat #{schema_path} | sqlite3 #{DEFAULT_DB_PATH}")
+			end
+
+			def import_sql(filename)
+				system("cat #{filename.inspect} | sqlite3 #{DEFAULT_DB_PATH}")
 			end
 
 			def add_user(u)

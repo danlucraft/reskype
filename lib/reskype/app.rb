@@ -22,7 +22,7 @@ module Reskype
     PER_PAGE = 500
     
     get "/" do
-			@sorted_people = User.all
+			@sorted_people = User.all.sort_by(&:num_messages).reverse
       erb :index
     end
     
@@ -31,7 +31,7 @@ module Reskype
 			@chat = Chat[:id => @chat_id]
       @total = @chat.messages.length
       @pages = (@total / PER_PAGE) + 1
-      messages = @chat.messages.reverse
+      messages = @chat.messages
       if params[:message]
         if ix = messages.map {|m| m["unique_id"]}.index(params[:message].to_i)
           @page = ix/PER_PAGE
@@ -39,7 +39,7 @@ module Reskype
       end
       @page ||= (params[:page] || (@pages - 1)).to_i
       @messages = messages[@page*PER_PAGE..(@page + 1)*PER_PAGE]
-      @name = @chat.nice_name
+      @name = @chat.topic
 
       @page_type = "chat"
       @page_id = @chat.id
@@ -54,7 +54,7 @@ module Reskype
 			@messages = @user.messages
       @pages = (@total / PER_PAGE) + 1
       @page = (params[:page] || (@pages - 1)).to_i
-      @messages = @messages.reverse[@page*PER_PAGE..(@page + 1)*PER_PAGE]
+      @messages = @messages[@page*PER_PAGE..(@page + 1)*PER_PAGE]
       @name = @user.name
       @page_type = "user"
       @page_id = @user_id
@@ -64,7 +64,6 @@ module Reskype
     
     def initialize
 			base = Db::Base.new
-			@history = base.history
 			super
     end
   end

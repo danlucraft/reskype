@@ -7,6 +7,7 @@ require 'sqlite3'
 require 'sinatra'
 require 'sequel'
 require 'csv'
+require 'logger'
 
 require 'reskype/import/skype5'
 require 'reskype/import/skype3'

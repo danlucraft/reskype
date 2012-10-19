@@ -9,6 +9,20 @@ module Reskype
 				@db ||= SQLite3::Database.new(@filename)
 			end
 
+			def id_namespace
+				@space ||= begin
+				if space = ENV["RESKYPE_ID_SPACE"]
+					space.to_i
+				else
+					raise "missing RESKYPE_ID_SPACE"
+				end
+									 end
+			end
+
+			def idify(id)
+				id.to_i*10 + id_namespace
+			end
+
 			def hashify(columns, row)
 				h = {}
 				columns.zip(row) do |column_name, value|
@@ -17,49 +31,50 @@ module Reskype
 				h
 			end
 
-			def import2(history)
-				system("sqlite3 -csv \"#{@filename}\" \"select id,name,topic from Chats\" > Chats.csv")
-				system("sqlite3 -csv \"#{@filename}\" \"select id,convo_id,author,timestamp,body_xml,identities from Messages\" > Messages.csv")
-				system("sqlite3 -csv \"#{@filename}\" \"select id,skypename,fullname from Contacts\" > Contacts.csv")
-
-				#jFile.open("new_chats.sql", "w") do |f|
-					#jCSV.foreach("Chats.csv") do |row|
-
-
-				
-				users = {}
-				CSV.foreach("Contacts.csv") do |row|
-					id, skypename, fullname = *row
-					users[skypename] = {:id => id, :skypename => skypename, :fullname => fullname }
-				end
-
-			end
-
       def import(history)
-				import_chats(history)
+				chats = import_chats(history)
 				users = import_users(history)
-				import_messages(history, users)
+				import_messages(history, users, chats)
 			end
 
 			def import_chats(history)
-				_, *rows = db.execute2("select id,name,topic from Chats")
+				c = {}
+				_, *rows = db.execute2("select conv_dbid,name,topic from Chats")
 
 				File.open("chats.sql", "w") do |f|
 					rows.map do |id, name, topic|
-						f.puts "insert into chats (id, name, topic) values (#{id}, #{name.inspect}, #{topic ? topic.inspect : "NULL"});"
+						if ENV["RESKYPE_PRIVATE"] or (topic and topic != "")
+							c[id] = topic
+							f.puts "insert into chats (id, name, topic) values (#{idify(id)}, #{name.inspect}, #{topic ? topic.inspect : "NULL"});"
+						end
 					end
 				end
+
+				history.import_sql("chats.sql")
+				c
 			end
 
-			def import_messages(history, users)
+			def escape(string)
+				string.gsub("\"", "\"\"")
+			end
+
+			def import_messages(history, users, chats)
 				columns, *rows = db.execute2("select id,convo_id,author,timestamp,body_xml,identities from Messages")
 				File.open("messages.sql", "w") do |f|
 					rows.map do |id, chat_id, skypename, timestamp, body, identities|
-						user_id = users[skypename]
-						created_at = Time.at(timestamp.to_i)
-						f.puts "insert into messages (id, chat_id, user_id, created_at, body, identities) values (#{id}, #{chat_id}, #{user_id}, #{created_at}, #{body ? body.inspect : "NULL"}, #{identities ? identities.inspect : "NULL"});"
+						if chats[chat_id.to_i]
+							if user_id = users[skypename]
+							else
+								user_id = 1000000 + rand(1000000)
+								f.puts "insert into users (id, username, fullname) values (#{idify(user_id)}, #{skypename.inspect}, NULL);"
+							end
+							created_at = Time.at(timestamp.to_i)
+							f.puts "insert into messages (id, chat_id, user_id, created_at, body, identities) values (#{idify(id)}, #{idify(chat_id)}, #{idify(user_id)}, #{created_at.to_s.inspect}, #{body ? "\"" + escape(body) + "\"": "NULL"}, #{identities ? identities.inspect : "NULL"});"
+						end
 					end
 				end
+
+				history.import_sql("messages.sql")
 			end
 
 			def import_users(history)
@@ -68,9 +83,10 @@ module Reskype
 				File.open("users.sql", "w") do |f|
 					rows.map do |id, username, fullname|
 						u[username] = id
-						f.puts "insert into users (id, username, fullname) values (#{id}, #{username ? username.inspect : "NULL"}, #{fullname ? fullname.inspect : "NULL"});"
+						f.puts "insert into users (id, username, fullname) values (#{idify(id)}, #{username ? username.inspect : "NULL"}, #{fullname ? fullname.inspect : "NULL"});"
 					end
 				end
+				history.import_sql("users.sql")
 				u
 			end
 

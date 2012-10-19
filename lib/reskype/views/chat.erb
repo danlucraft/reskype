@@ -42,7 +42,7 @@
               <% end %>
               <% if @show_chat_name %>
                 <a href="/chat/<%= message.chat_id %>?message=<%= message.id %>#<%= message.id %>">
-                  <%= message.chat.nice_name %>
+									<%= message.chat.topic %>
                 </a>
               <% end %>
             </span>
