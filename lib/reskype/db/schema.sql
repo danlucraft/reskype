@@ -7,7 +7,8 @@ create table "chats" (
 
 create table "users" (
 	id integer not null primary key,
-  username text
+  username text,
+	fullname text
 );
 
 create table "messages" (

@@ -1,9 +1,18 @@
 module Reskype
 	module Db
 		class History
+			attr_reader :db
 
-			def initialize(data)
-				@data = data
+			def initialize(db)
+				@db = db
+			end
+
+			def num_messages
+				db.execute("select count(*) from messages").first.first
+			end
+
+			def num_chats
+				db.execute("select count(*) from chats").first.first
 			end
 
 			def clear
@@ -39,13 +48,28 @@ module Reskype
 
 			def add(new_data)
 				new_data["chats"].each do |chat_id, chat_info|
-					if old_chat = chats[chat_id]
-						old_chat.merge(chat_info)
-					else
-						@data["chats"][chat_id] = chat_info
+					db[:chats].insert(:name => chat_info["name"], :id => chat_id.to_i)
+					chat_info["messages"].each do |_, message|
+					  author_id = find_or_create_author(message["author"])
+						p [message["author"], author_id]
+						db[:messages].insert(:user_id => author_id, :body => message["body"])
 					end
 				end
 				clear
+			end
+
+			def find_or_create_author(author_name)
+				authors ||= {}
+				if id = authors[author_name]
+					return id
+				end
+				if a = db[:users].filter(:username => author_name).first
+					id = a["id"]
+				else
+					id = db[:users].insert(:username => author_name)
+				end
+				authors[author_name] = id
+				id
 			end
 
 			def inspect

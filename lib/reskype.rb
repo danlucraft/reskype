@@ -5,6 +5,7 @@ require 'rubygems'
 require 'json'
 require 'sqlite3'
 require 'sinatra'
+require 'sequel'
 
 require 'reskype/import/skype5'
 require 'reskype/import/skype3'

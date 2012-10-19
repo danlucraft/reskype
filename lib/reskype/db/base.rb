@@ -10,7 +10,15 @@ module Reskype
 			end
 
 			def db
-				@db ||= SQLite3::Database.new(filename)
+				@db ||= Sequel.sqlite(DEFAULT_DB_PATH)
+			end
+
+			def schema_path
+				File.expand_path("../schema.sql", __FILE__)
+			end
+
+			def migrate
+				system("cat #{schema_path} | sqlite3 #{DEFAULT_DB_PATH}")
 			end
 
 			def history
