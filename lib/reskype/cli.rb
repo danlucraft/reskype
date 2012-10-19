@@ -34,6 +34,7 @@ class Reskype
 		  puts "Skype5 #{file}"
 			reskype5 = Reskype::Skype5.new(file)
 			puts "  Chats: #{reskype5.chats.length}"
+			puts JSON.pretty_generate(reskype5.to_data)
 		end
 
 		def process
@@ -56,11 +57,11 @@ class Reskype
 			main_db_paths.each do |main_db_path|
 				puts main_db_path
 				reskype5 = Reskype::Skype5.new(main_db_path)
-				chats += Reskype.export(reskype5.chats)
+				chats += export(reskype5.chats)
 			end
 
 			reskype3 = Reskype::Skype3.new(user_dir)
-			chats += Reskype.export(reskype3.chats)
+			chats += export(reskype3.chats)
 
 			unless File.exist?(target_dir)
 				raise
@@ -86,5 +87,12 @@ class Reskype
 				end
 			end
 		end	
+
+		def export(chats)
+			chats.map do |chat|
+				chat
+			end
+		end
+
 	end
 end

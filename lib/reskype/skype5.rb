@@ -1,4 +1,3 @@
-
 class Reskype
   class Skype5
     def initialize(filename)
@@ -17,16 +16,16 @@ class Reskype
       db.execute("select count(*) from Chats").first.first
     end
 
-		def chats_columns
-			@chats_columns ||= columns("Chats")
+		def chat_columns
+			@chat_columns ||= columns("Chats")
 		end
 
-		def messages_columns
-			@messages_columns ||= columns("Messages")
+		def message_columns
+			@message_columns ||= columns("Messages")
 		end
 
 		def columns(table)
-			columns = db.execute2("PRAGMA table_info(Messages)")
+			columns = db.execute2("PRAGMA table_info(#{table})")
 			column_columns = columns[0]
 			columns = columns[1..-1]
 			name_ix = column_columns.index("name")
@@ -41,15 +40,25 @@ class Reskype
       end
     end
 
+		def to_data
+			data = {
+				"chats" => {}
+			}
+			chats[0..5].each do |c|
+				data["chats"][c.id] = c.to_data
+			end
+			data
+		end
+
     class Chat
 			attr_reader :skype5
 
       def initialize(skype5, row)
-        skype5 = skype5
+        @skype5 = skype5
         @row = row
         @h = {}
-        skype5.chats_columns.each do |row_name|
-          @h[row_name] = @row[skype5.chats_columns.index(row_name)]
+        skype5.chat_columns.each do |row_name|
+          @h[row_name] = @row[skype5.chat_columns.index(row_name)]
         end
       end
 
@@ -61,11 +70,11 @@ class Reskype
       end
 
       def name
-        @row[skype5.chats_columns.index("name")]
+        @h["name"]
       end
 
       def topic
-        t = @row[skype5.chats_columns.index("topic")]
+        t = @h["topic"]
         t == "" ? nil : t
       end
 
@@ -74,15 +83,15 @@ class Reskype
       end
 
       def posters
-        (@row[skype5.chats_columns.index("posters")] || "").split(" ")
+        (@h["posters"] || "").split(" ")
       end
 
       def id
-        @row[skype5.chats_columns.index("id")]
+        @h["conv_dbid"]
       end
 
       def participants
-        ((@row[skype5.chats_columns.index("participants")] || "").split(" ") + posters).uniq
+        ((@h["participants"] || "").split(" ") + posters).uniq
       end
 
       def num_messages
@@ -91,36 +100,71 @@ class Reskype
 
       def messages
         @messages ||= begin
-          columns, *rows = skype5.db.execute2("select * from Messages where chatname = '#{name}' order by timestamp desc")
+          columns, *rows = skype5.db.execute2("select * from Messages where convo_id = #{id} order by timestamp desc")
           rows.map {|r| Message.new(skype5, r)}
         end
       end
-    end
+
+			def to_data
+				data = {
+				  "id" => id.to_s,
+				  "chatname" => name.inspect,
+				  "nice_name" => nice_name.inspect,
+				  "posters" => posters,
+				  "messages" => {}
+				}
+				messages.each do |m|
+					data["messages"][m.id] = m.to_data
+				end
+				data
+			end
+		end
 
     class Message
 			attr_reader :skype5
 
       def initialize(skype5, row)
-				skype5 = skype5
+				@skype5 = skype5
         @row = row
+				@h = {}
+        skype5.message_columns.each do |row_name|
+          @h[row_name] = @row[skype5.message_columns.index(row_name)]
+        end
       end
 
       def created_at
-        Time.at(@row[skype5.messages_columns.index("timestamp")])
+        Time.at(@h["timestamp"])
       end
 
+			def id
+				@h["id"]
+			end
+			
+			def convo_id
+				@h["convo_id"]
+			end
+
       def author
-        @row[skype5.messages_columns.index("author")]
+        @h["author"]
       end
 
       def body
-        @row[skype5.messages_columns.index("body_xml")] || ""
+        @h["body_xml"] || ""
       end
 
       def identities
-        @row[skype5.messages_columns.index("identities")] || ""
+        @h["identities"] || ""
       end
-    end
 
+			def to_data
+				{
+					"id"         => id,
+				  "author"     => author, 
+				  "created_at" => created_at,
+				  "body"       => body,
+				  "identities" => identities
+				}
+			end
+    end
   end
 end
