@@ -9,22 +9,6 @@ module Reskype
 				@db ||= SQLite3::Database.new(@filename)
 			end
 
-			def chat_columns
-				@chat_columns ||= columns("Chats")
-			end
-
-			def message_columns
-				@message_columns ||= columns("Messages")
-			end
-
-			def columns(table)
-				columns = db.execute2("PRAGMA table_info(#{table})")
-				column_columns = columns[0]
-				columns = columns[1..-1]
-				name_ix = column_columns.index("name")
-				columns.map {|r| r[name_ix]}
-			end
-
 			def hashify(columns, row)
 				h = {}
 				columns.zip(row) do |column_name, value|
@@ -33,58 +17,61 @@ module Reskype
 				h
 			end
 
+			def import2(history)
+				system("sqlite3 -csv \"#{@filename}\" \"select id,name,topic from Chats\" > Chats.csv")
+				system("sqlite3 -csv \"#{@filename}\" \"select id,convo_id,author,timestamp,body_xml,identities from Messages\" > Messages.csv")
+				system("sqlite3 -csv \"#{@filename}\" \"select id,skypename,fullname from Contacts\" > Contacts.csv")
+
+				#jFile.open("new_chats.sql", "w") do |f|
+					#jCSV.foreach("Chats.csv") do |row|
+
+
+				
+				users = {}
+				CSV.foreach("Contacts.csv") do |row|
+					id, skypename, fullname = *row
+					users[skypename] = {:id => id, :skypename => skypename, :fullname => fullname }
+				end
+
+			end
+
       def import(history)
 				import_chats(history)
-				import_messages(history)
-				import_users(history)
+				users = import_users(history)
+				import_messages(history, users)
 			end
 
 			def import_chats(history)
-				columns, *rows = db.execute2("select * from Chats")
+				_, *rows = db.execute2("select id,name,topic from Chats")
 
-				rows.map do |r| 
-					row = hashify(columns, r)
-					history.add_chat(
-						"id" => row["conv_dbid"],
-						"name" => row["name"],
-						"topic" => row["topic"]
-					)
+				File.open("chats.sql", "w") do |f|
+					rows.map do |id, name, topic|
+						f.puts "insert into chats (id, name, topic) values (#{id}, #{name.inspect}, #{topic ? topic.inspect : "NULL"});"
+					end
 				end
 			end
 
-			def import_messages(history)
-				columns, *rows = db.execute2("select * from Messages")
-				rows.map do |r| 
-					row = hashify(columns, r)
-					history.add_message(
-						"id" => row["id"],
-						"chat_id" => row["convo_id"],
-						"user_id" => user_id(row["author"]),
-						"body" => row["body_xml"],
-						"identities" => row["identities"],
-						"created_at" => Time.at(row["timestamp"])
-					)
+			def import_messages(history, users)
+				columns, *rows = db.execute2("select id,convo_id,author,timestamp,body_xml,identities from Messages")
+				File.open("messages.sql", "w") do |f|
+					rows.map do |id, chat_id, skypename, timestamp, body, identities|
+						user_id = users[skypename]
+						created_at = Time.at(timestamp.to_i)
+						f.puts "insert into messages (id, chat_id, user_id, created_at, body, identities) values (#{id}, #{chat_id}, #{user_id}, #{created_at}, #{body ? body.inspect : "NULL"}, #{identities ? identities.inspect : "NULL"});"
+					end
 				end
 			end
 
 			def import_users(history)
-				@users.each do |user|
-					history.add_user(
-						"id" => user["id"],
-						"username" => user["skypename"],
-						"fullname" => user["fullname"]
-					)
+				_, *rows = db.execute2("select id,skypename,fullname from Contacts")
+				u = {}
+				File.open("users.sql", "w") do |f|
+					rows.map do |id, username, fullname|
+						u[username] = id
+						f.puts "insert into users (id, username, fullname) values (#{id}, #{username ? username.inspect : "NULL"}, #{fullname ? fullname.inspect : "NULL"});"
+					end
 				end
-			end
-
-			def user_id(skypename)
-				@users ||= {}
-				return @users[skypename]["id"] if @users[skypename]
-
-				columns, *rows = db.execute2("select id,fullname from Contacts where skypename = \"#{skypename}\"")
-				id, fullname = *rows.first
-				@users[skypename] = {"id" => id, "skypename" => skypename, "fullname" => fullname}
-				id
+				u
 			end
 
 		end
