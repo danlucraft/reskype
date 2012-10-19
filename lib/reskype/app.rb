@@ -17,7 +17,7 @@ chat__Bugs-and-Spam-egg-sausage-and-spam.json
 chat__curl-httpscrapy-site.com--devnull.json
 TXT
 
-class Reskype
+module Reskype
   class App < Sinatra::Base
     PER_PAGE = 500
     
@@ -27,9 +27,7 @@ class Reskype
     end
     
     get "/" do
-      @chats = @chats.sort_by {|c| Time.parse(c["messages"].first["created_at"])}.reverse
-
-      @sorted_people = @people.to_a.sort_by {|n, ms| ms.length}.reverse
+      @sorted_people = @history.people.to_a.sort_by {|n, ms| ms.length}.reverse
       erb :index
     end
     
@@ -69,32 +67,8 @@ class Reskype
     end
     
     def load_data
-      data_dir = ENV["RESKYPE_SERVER_DATA"]
-      unless data_dir and File.exist?(data_dir) and File.directory?(data_dir)
-        raise "RESKYPE_SERVER_DATA missing or not a directory"
-      end
-      @chats = []
-      Dir[data_dir + "/chat*.json"].each do |json_file|
-        begin
-          chat = JSON.load(File.read(json_file))
-          if chat["posters"].length > 10 || (EXPLICIT_INCLUDES.any? {|inc| json_file =~ /#{inc}/})
-            @chats << chat
-          end
-        rescue JSON::ParserError
-          puts "encoding error in #{json_file}"
-        end
-      end
-      
-      @people = Hash.new { |hash, key| hash[key] = [] }
-      @chats.each do |chat|
-        chat["messages"].each do |message|
-          message["chat_name"] = chat["nice_name"][1..-2]
-          message["chat_id"] = chat["id"]
-          message["unique_id"] = rand(1000000000)
-          @people[message["author"]] << message
-        end
-      end
-      @people.each {|n, ms| @people[n] = ms.sort_by {|m| m["created_at"]}.reverse}
+			base = Db::Base.new
+			@history = base.history
     end
   end
 end

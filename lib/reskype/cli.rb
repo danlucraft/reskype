@@ -1,4 +1,4 @@
-class Reskype
+module Reskype
 	class CLI
 		def usage
 			puts "USAGE: ruby bin/parse import SKYPE_DB"
@@ -6,9 +6,13 @@ class Reskype
 			puts "       ruby bin/parse import3 SKYPE_DB"
 			puts "       ruby bin/parse debug5 SKYPE_DB"
 			puts
-			puts "on OSX SKYPE_DIR is likely to be /Users/dan/Library/Application\ Support/Skype/URUSERNAME/"
-			puts "TARGET_DIR is an existing, should be empty, directory where the parsed chat files will be placed"
+			puts "On OSX the db file is likely to be /Users/dan/Library/Application\ Support/Skype/USERNAME/main.db"
+			puts "The chat db is stored as ~/reskype.json"
 			exit
+		end
+
+		def database_filepath
+			File.expand_path("~/reskype.json")
 		end
 
 		def run
@@ -20,9 +24,23 @@ class Reskype
 				process
 			when "debug5"
 				debug5
+			when "import5"
+				import5
 			else
 				usage
 			end
+		end
+
+		def import5
+			file = ARGV[1]
+			unless file and File.exist?(file)
+				puts "SKYPE_DB not found\n"
+				usage
+			end
+
+			base = Db::Base.new
+			base.add(Reskype::Import::Skype5.new(file).to_data)
+			base.save
 		end
 
 		def debug5
@@ -32,7 +50,7 @@ class Reskype
 				usage
 			end
 		  puts "Skype5 #{file}"
-			reskype5 = Reskype::Skype5.new(file)
+			reskype5 = Reskype::Import::Skype5.new(file)
 			puts "  Chats: #{reskype5.chats.length}"
 			puts JSON.pretty_generate(reskype5.to_data)
 		end
@@ -56,11 +74,11 @@ class Reskype
 
 			main_db_paths.each do |main_db_path|
 				puts main_db_path
-				reskype5 = Reskype::Skype5.new(main_db_path)
+				reskype5 = Reskype::Import::Skype5.new(main_db_path)
 				chats += export(reskype5.chats)
 			end
 
-			reskype3 = Reskype::Skype3.new(user_dir)
+			reskype3 = Reskype::Import::Skype3.new(user_dir)
 			chats += export(reskype3.chats)
 
 			unless File.exist?(target_dir)

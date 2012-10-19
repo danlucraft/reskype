@@ -15,14 +15,14 @@
       <h2 style="padding-bottom: 20px; font-size:1.5em">Chats</h2>
 
       <table style="width: 800px">
-        <% @chats.each do |chat| %>
+        <% @history.chats.each do |chat| %>
           <tr>
             <td style="width: 500px">
-              <a href="/chat/<%= chat["id"] %>"><%= chat["nice_name"][1..-2] %></a>
+              <a href="/chat/<%= chat.id %>"><%= chat.nice_name %></a>
             </td>
-            <td style="width: 100px;text-align:right"><%= chat["messages"].length %>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td><%= Time.parse(chat["messages"].last["created_at"]).strftime("%d/%m/%Y") %></td>
-            <td><%= Time.parse(chat["messages"].first["created_at"]).strftime("%d/%m/%Y") %></td>
+            <td style="width: 100px;text-align:right"><%= chat.messages.length %>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td><%= chat.messages.last.created_at.strftime("%d/%m/%Y") %></td>
+            <td><%= chat.messages.first.created_at.strftime("%d/%m/%Y") %></td>
           </tr>
         <% end %>
       </table>
@@ -36,8 +36,8 @@
               <a href="/user/<%= user %>"><%= user %></a>
             </td>
             <td style="width: 100px;text-align:right"><%= messages.length %>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td><%= Time.parse(messages.last["created_at"]).strftime("%d/%m/%Y") %></td>
-            <td><%= Time.parse(messages.first["created_at"]).strftime("%d/%m/%Y") %></td>
+            <td><%= messages.last.created_at.strftime("%d/%m/%Y") %></td>
+            <td><%= messages.first.created_at.strftime("%d/%m/%Y") %></td>
           </tr>
         <% end %>
       </table>

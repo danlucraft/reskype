@@ -6,10 +6,16 @@ require 'json'
 require 'sqlite3'
 require 'sinatra'
 
-require 'reskype/skype5'
-require 'reskype/skype3'
+require 'reskype/import/skype5'
+require 'reskype/import/skype3'
+
+require 'reskype/db/history'
+require 'reskype/db/chat'
+require 'reskype/db/message'
+require 'reskype/db/base'
+
 require 'reskype/app'
 require 'reskype/cli'
 
-class Reskype
+module Reskype
 end
