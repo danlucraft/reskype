@@ -40,6 +40,7 @@ module Reskype
 
 			base = Db::Base.new
 			base.add(Reskype::Import::Skype5.new(file).to_data)
+			p base.history
 		end
 
 		def debug5

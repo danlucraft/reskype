@@ -7,10 +7,8 @@ module Reskype
 
 			def initialize(filename=DEFAULT_DB_PATH)
 				@filename = filename
-			end
-
-			def db
-				@db ||= Sequel.sqlite(DEFAULT_DB_PATH)
+				Sequel::Model.db = Sequel.sqlite(DEFAULT_DB_PATH)
+				require 'reskype/models'
 			end
 
 			def schema_path
@@ -23,7 +21,7 @@ module Reskype
 
 			def history
 				@history ||= begin
-					h = History.new(db)
+					h = History.new
 				end
 			end
 

@@ -10,9 +10,7 @@ require 'sequel'
 require 'reskype/import/skype5'
 require 'reskype/import/skype3'
 
-require 'reskype/db/history'
-require 'reskype/db/chat'
-require 'reskype/db/message'
+require 'reskype/history'
 require 'reskype/db/base'
 
 require 'reskype/app'

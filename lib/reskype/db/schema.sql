@@ -1,8 +1,8 @@
 
 create table "chats" (
-	id integer not null primary key,
+	id integer not null,
 	name text,
-	description text
+	topic text
 );
 
 create table "users" (
@@ -12,10 +12,11 @@ create table "users" (
 );
 
 create table "messages" (
-	id integer not null primary key,
+	id integer not null,
 	user_id integer,
 	chat_id integer,
 	body text,
-	identities text
+	identities text,
+	created_at datetime
 );
 

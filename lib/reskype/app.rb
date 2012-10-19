@@ -21,22 +21,17 @@ module Reskype
   class App < Sinatra::Base
     PER_PAGE = 500
     
-    def initialize
-      load_data
-      super
-    end
-    
     get "/" do
-      @sorted_people = @history.people.to_a.sort_by {|n, ms| ms.length}.reverse
+			@sorted_people = User.all
       erb :index
     end
     
     get "/chat/:chat_id" do
       @chat_id = params[:chat_id]
-      @chat = @chats.detect {|c| c["id"] == @chat_id}
-      @total = @chat["messages"].length
+			@chat = Chat[:id => @chat_id]
+      @total = @chat.messages.length
       @pages = (@total / PER_PAGE) + 1
-      messages = @chat["messages"].reverse
+      messages = @chat.messages.reverse
       if params[:message]
         if ix = messages.map {|m| m["unique_id"]}.index(params[:message].to_i)
           @page = ix/PER_PAGE
@@ -44,31 +39,33 @@ module Reskype
       end
       @page ||= (params[:page] || (@pages - 1)).to_i
       @messages = messages[@page*PER_PAGE..(@page + 1)*PER_PAGE]
-      @name = @chat["nice_name"][1..-2]
+      @name = @chat.nice_name
 
       @page_type = "chat"
-      @page_id = @chat["id"]
+      @page_id = @chat.id
       @show_chat_name = false
       erb :chat
     end
     
     get "/user/:user_id" do
       @user_id = params[:user_id]
-      @total = @people[@user_id].length
+      @user = User[:id => @user_id]
+			@total = @user.messages.length
+			@messages = @user.messages
       @pages = (@total / PER_PAGE) + 1
       @page = (params[:page] || (@pages - 1)).to_i
-      messages = @people[@user_id]
-      @messages = messages.reverse[@page*PER_PAGE..(@page + 1)*PER_PAGE]
-      @name = @user_id
+      @messages = @messages.reverse[@page*PER_PAGE..(@page + 1)*PER_PAGE]
+      @name = @user.username
       @page_type = "user"
       @page_id = @user_id
       @show_chat_name = true
       erb :chat
     end
     
-    def load_data
+    def initialize
 			base = Db::Base.new
 			@history = base.history
+			super
     end
   end
 end
