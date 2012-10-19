@@ -4,12 +4,14 @@ create table "chats" (
 	name text,
 	topic text
 );
+create index ix_chats_id on chats (id);
 
 create table "users" (
-	id integer not null primary key,
+	id integer not null,
   username text,
 	fullname text
 );
+create index ix_users_id on users (id);
 
 create table "messages" (
 	id integer not null,
@@ -19,4 +21,6 @@ create table "messages" (
 	identities text,
 	created_at datetime
 );
+create index ix_messages_user_id on messages (user_id);
+create index ix_messages_chat_id on messages (chat_id);
 

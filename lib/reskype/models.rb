@@ -9,13 +9,17 @@ module Reskype
 		end
 
 		def nice_name
-			topic || participants[0..5].map(&:username).join(", ")
+			topic || participants[0..5].map(&:name).join(", ")
 		end
 	end
 
 	class User < Sequel::Model
 		def messages
 			Message.where(:user_id => id).to_a
+		end
+
+		def name
+			fullname || username
 		end
 	end
 

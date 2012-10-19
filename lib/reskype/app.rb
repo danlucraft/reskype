@@ -55,7 +55,7 @@ module Reskype
       @pages = (@total / PER_PAGE) + 1
       @page = (params[:page] || (@pages - 1)).to_i
       @messages = @messages.reverse[@page*PER_PAGE..(@page + 1)*PER_PAGE]
-      @name = @user.username
+      @name = @user.name
       @page_type = "user"
       @page_id = @user_id
       @show_chat_name = true

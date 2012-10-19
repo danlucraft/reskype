@@ -43,6 +43,20 @@ module Reskype
 				end
 			end
 
+			def user_id(skypename)
+				@users ||= {}
+				return @users[skypename]["id"] if @users[skypename]
+
+				columns, *rows = db.execute2("select id,fullname from Contacts where skypename = \"#{skypename}\"")
+				id, fullname = *rows.first
+				@users[skypename] = {"id" => id, "skypename" => skypename, "fullname" => fullname}
+				id
+			end
+
+			def users
+				@users || {}
+			end
+
 			def to_data
 				data = {
 					"chats" => {}
@@ -52,6 +66,7 @@ module Reskype
 				cs.each do |c|
 					data["chats"][c.id] = c.to_data
 				end
+				data["users"] = users.values
 				data
 			end
 			
@@ -156,7 +171,7 @@ module Reskype
 					{
 						"id"         => id,
 						"chat_id"    => convo_id,
-						"author"     => author, 
+						"user_id"    => skype5.user_id(author), 
 						"created_at" => created_at,
 						"body"       => body,
 						"identities" => identities

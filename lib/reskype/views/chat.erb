@@ -38,7 +38,7 @@
   					<span class="sender">
               <span class="profile" data-sender="lucia.ferne"></span>
               <% if !@show_chat_name %>
-                <a name="<%= message.id %>" href="/user/<%= message.user_id %>"><%= message.user.username %></a>
+                <a name="<%= message.id %>" href="/user/<%= message.user_id %>"><%= message.user.name %></a>
               <% end %>
               <% if @show_chat_name %>
                 <a href="/chat/<%= message.chat_id %>?message=<%= message.id %>#<%= message.id %>">
@@ -52,7 +52,7 @@
             <% if ["", nil].include? message.identities %>
               <%= message.body %>
             <% elsif !message.identities.include?(" ") %>
-              <%= message.user.username %> added <%= message.identities %> to the chat
+              <%= message.user.name %> added <%= message.identities %> to the chat
             <% end %>
           </div>
   			</div>

@@ -33,7 +33,7 @@
         <% @sorted_people.each do |user| %>
           <tr>
             <td style="width: 500px">
-              <a href="/user/<%= user.id %>"><%= user.username %></a>
+              <a href="/user/<%= user.id %>"><%= user.name %></a>
             </td>
             <td style="width: 100px;text-align:right"><%= user.messages.length %>&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td><%= user.messages.last.created_at.strftime("%d/%m/%Y") %></td>

@@ -1,6 +1,10 @@
 module Reskype
 	class History
 		def add(new_data)
+			new_data["users"].each do |user_info|
+				find_or_create_author(user_info["id"], user_info["skypename"], user_info["fullname"])
+			end
+
 			new_data["chats"].each do |chat_id, chat_info|
 				unless Chat[:id => chat_id.to_i]
 					Chat.create(:name => chat_info["name"], 
@@ -8,9 +12,8 @@ module Reskype
 											:topic => chat_info["topic"])
 				end
 				chat_info["messages"].each do |_, message|
-					author_id = find_or_create_author(message["author"])
 					unless Message[:id => message["id"].to_i]
-						Message.create(:user_id => author_id, 
+						Message.create(:user_id => message["user_id"], 
 													 :body => message["body"], 
 													 :id => message["id"].to_i, 
 													 :created_at => message["created_at"], 
@@ -20,18 +23,11 @@ module Reskype
 			end
 		end
 
-		def find_or_create_author(author_name)
-			@authors ||= {}
-			if id = @authors[author_name]
-				return id
-			end
-			if a = User[:username => author_name]
-				id = a.id
+		def find_or_create_author(id, skypename, fullname)
+			if a = User[:id => id]
 			else
-				id = User.create(:username => author_name).id
+				User.create(:id => id, :username => skypename, :fullname => fullname)
 			end
-			@authors[author_name] = id
-			id
 		end
 
 		def inspect

@@ -26,6 +26,7 @@ module Reskype
 			end
 
 			def add(new_data)
+				p new_data["users"]
 				history.add(new_data)
 			end
 		end
